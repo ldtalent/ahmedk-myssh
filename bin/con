@@ -7,9 +7,10 @@ import pprint
 import os
 from sqlalchemy.orm import sessionmaker
 from ssh_app.models import Base, SSHEntry
+import ssh_app
 from sqlalchemy import create_engine
-db_link = "/".join(os.path.dirname(os.path.abspath(__file__)).split('/')[0:-1])
-engine = create_engine('sqlite:///{}/ssh.db'.format(db_link))
+main_link = os.path.dirname(os.path.abspath(ssh_app.__file__))
+engine = create_engine('sqlite:///{}/ssh.db'.format(main_link))
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
